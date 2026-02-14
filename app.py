@@ -1082,13 +1082,13 @@ def tab_search_manual(s2: SemanticScholarClient):
 
 
 def tab_scope_ai(g: GeminiHelper):
-    st.subheader("Scope (AI Mode V2)")
+    st.subheader("Scope (AI Mode)")
     s = st.session_state.scope
 
     s["research_question"] = st.text_area("Research question / objective", value=s.get("research_question", ""), height=90)
     s["year_range"] = st.text_input("Year range constraint (optional)", value=s.get("year_range", ""), placeholder="e.g., 2019-2026")
     s["rubric"] = st.text_area(
-        "Inclusion rubric / screening criteria (V2)",
+        "Inclusion rubric / screening criteria",
         value=s.get("rubric", ""),
         height=120,
         placeholder="Example: include peer-reviewed studies on RAG evaluation in interactive systems; exclude pure engineering blogs; require methodology details...",
@@ -1105,7 +1105,7 @@ def tab_scope_ai(g: GeminiHelper):
     s["notes"] = st.text_area("Notes (optional)", value=s.get("notes", ""), height=80)
     st.session_state.scope = s
 
-    with st.expander("AI: generate a search plan (V2)"):
+    with st.expander("Expand to ask AI for a search plan that incorporates the above requirements"):
         n = st.slider("Number of queries", 3, 15, 8)
         if st.button("Generate plan with Gemini"):
             if not s["research_question"].strip():
@@ -1124,7 +1124,7 @@ def tab_scope_ai(g: GeminiHelper):
 
 
 def tab_search_ai(s2: SemanticScholarClient, g: GeminiHelper):
-    st.subheader("Search (Gemini-assisted V2)")
+    st.subheader("Search (Gemini-assisted)")
     tab_prisma()
 
     plan = st.session_state.get("ai_plan")
@@ -1248,7 +1248,7 @@ def tab_search_ai(s2: SemanticScholarClient, g: GeminiHelper):
 
 
 def tab_clusters_ai(g: GeminiHelper):
-    st.subheader("Clusters (AI Mode V2)")
+    st.subheader("Clusters (AI Mode)")
     clusters = st.session_state.get("clusters") or {}
     if not clusters:
         st.info("No clusters yet. Run AI triage first.")
@@ -1286,7 +1286,7 @@ def tab_clusters_ai(g: GeminiHelper):
 
 
 def tab_screening():
-    st.subheader("Screening Queue (V2)")
+    st.subheader("Screening Queue")
     tab_prisma()
 
     keys = list(st.session_state.papers.keys())
@@ -1371,7 +1371,7 @@ def tab_snowballed():
 
 
 def tab_export():
-    st.subheader("Export + Session (V2)")
+    st.subheader("Export + Session")
     tab_prisma()
 
     keys_all = list(st.session_state.papers.keys())
